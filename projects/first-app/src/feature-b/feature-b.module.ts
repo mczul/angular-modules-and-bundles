@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LegacySecondComponent } from './legacy-second/legacy-second.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LegacySecondComponent
+  ],
   imports: [
     CommonModule
   ]
