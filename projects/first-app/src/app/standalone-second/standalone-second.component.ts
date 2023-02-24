@@ -6,7 +6,7 @@ import {CommonModule} from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './standalone-second.component.html',
-  styleUrls: ['./standalone-second.component.scss']
+  styles: []
 })
 export class StandaloneSecondComponent {
 

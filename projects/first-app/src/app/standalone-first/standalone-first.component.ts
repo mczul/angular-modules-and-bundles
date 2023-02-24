@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {StandaloneSecondComponent} from "../standalone-second/standalone-second.component";
 
 @Component({
   selector: 'app-standalone-first',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, StandaloneSecondComponent],
   templateUrl: './standalone-first.component.html',
-  styleUrls: ['./standalone-first.component.scss']
+  styles: []
 })
 export class StandaloneFirstComponent {
 

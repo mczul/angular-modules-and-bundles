@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LegacyFourthComponent } from './legacy-fourth.component';
+import {LegacyFourthComponent} from './legacy-fourth.component';
 
 describe('LegacyFourthComponent', () => {
   let component: LegacyFourthComponent;

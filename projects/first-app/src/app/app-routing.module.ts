@@ -24,6 +24,11 @@ const routes: Routes = [
     loadComponent: () => import('./standalone-second/standalone-second.component')
       .then(component => component.StandaloneSecondComponent)
   },
+  {
+    path: 'standalone/3',
+    loadComponent: () => import('./standalone-third/standalone-third.component')
+      .then(component => component.StandaloneThirdComponent)
+  },
 ];
 
 @NgModule({
