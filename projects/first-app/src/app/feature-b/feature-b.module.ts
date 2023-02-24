@@ -1,15 +1,25 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LegacySecondComponent } from './legacy-second/legacy-second.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {LegacyThirdComponent} from './legacy-third/legacy-third.component';
+import {LegacyFourthComponent} from './legacy-fourth/legacy-fourth.component';
+import {RouterModule, Routes} from "@angular/router";
+import {StandaloneFirstComponent} from "../standalone-first/standalone-first.component";
 
-
+const routes: Routes = [
+  {path: '', pathMatch: 'full', component: LegacyThirdComponent},
+  {path: '**', redirectTo: ''},
+];
 
 @NgModule({
   declarations: [
-    LegacySecondComponent
+    LegacyThirdComponent,
+    LegacyFourthComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    RouterModule.forChild(routes),
+    StandaloneFirstComponent,
+  ],
 })
-export class FeatureBModule { }
+export class FeatureBModule {
+}

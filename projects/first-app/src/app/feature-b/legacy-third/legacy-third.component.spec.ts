@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {LegacyFirstComponent} from './legacy-first.component';
+import {LegacyThirdComponent} from './legacy-third.component';
 
-describe('LegacyFirstComponent', () => {
-  let component: LegacyFirstComponent;
-  let fixture: ComponentFixture<LegacyFirstComponent>;
+describe('LegacyThirdComponent', () => {
+  let component: LegacyThirdComponent;
+  let fixture: ComponentFixture<LegacyThirdComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LegacyFirstComponent ]
+      declarations: [ LegacyThirdComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LegacyFirstComponent);
+    fixture = TestBed.createComponent(LegacyThirdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

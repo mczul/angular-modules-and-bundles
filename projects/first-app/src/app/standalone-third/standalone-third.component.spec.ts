@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StandaloneThirdComponent } from './standalone-third.component';
+import {StandaloneThirdComponent} from './standalone-third.component';
 
 describe('StandaloneThirdComponent', () => {
   let component: StandaloneThirdComponent;
