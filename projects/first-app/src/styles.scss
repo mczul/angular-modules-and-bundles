@@ -6,6 +6,8 @@ nav {
   justify-content: flex-start;
   align-items: baseline;
 
+  margin: 1em;
+
   @media (min-width: 50ch) {
     flex-direction: row;
   }
@@ -13,4 +15,34 @@ nav {
 
 .hidden-content {
   display: none;
+}
+
+:is(
+  app-legacy-first,
+  app-legacy-second,
+  app-legacy-third,
+  app-legacy-fourth,
+  app-standalone-first,
+  app-standalone-second,
+  app-standalone-third
+ ) {
+  display: block;
+  padding: 1em;
+}
+
+:is(
+  app-legacy-first,
+  app-legacy-second,
+  app-legacy-third,
+  app-legacy-fourth
+ ) {
+  border: dotted red .1em;
+}
+
+:is(
+  app-standalone-first,
+  app-standalone-second,
+  app-standalone-third
+) {
+  border: solid green .1em;
 }
