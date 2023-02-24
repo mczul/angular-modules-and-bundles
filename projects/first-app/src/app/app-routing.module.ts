@@ -1,9 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {StandaloneFirstComponent} from "./standalone-first/standalone-first.component";
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', component: StandaloneFirstComponent},
   {
     path: 'feature/a',
     loadChildren: () => import('./feature-a/feature-a.module')
@@ -29,6 +27,7 @@ const routes: Routes = [
     loadComponent: () => import('./standalone-third/standalone-third.component')
       .then(component => component.StandaloneThirdComponent)
   },
+  {path: '**', redirectTo: 'feature/a'},
 ];
 
 @NgModule({

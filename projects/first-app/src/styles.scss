@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 nav {
   display: flex;
   flex-direction: column;
@@ -17,6 +24,10 @@ nav {
   display: none;
 }
 
+#site {
+  margin: .5em .5em;
+}
+
 :is(
   app-legacy-first,
   app-legacy-second,
@@ -28,6 +39,15 @@ nav {
  ) {
   display: block;
   padding: 1em;
+  margin-bottom: .5em;
+
+  h3 {
+    margin: .5em 0;
+  }
+
+  h4 {
+    margin: .25em 0;
+  }
 }
 
 :is(
