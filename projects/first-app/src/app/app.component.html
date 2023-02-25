@@ -1,11 +1,11 @@
 <div id="site">
   <h1>👨‍🍳 App-étit pour l'avenir</h1>
   <nav>
-    <a [routerLink]="['feature', 'a']">Feature A (🍔 & 🍟)</a>
-    <a [routerLink]="['feature', 'b']">Feature B (🌭 & 🍺)</a>
-    <a [routerLink]="['standalone', '1']">Standalone 1 (🥦)</a>
-    <a [routerLink]="['standalone', '2']">Standalone 2 (🍏)</a>
-    <a [routerLink]="['standalone', '3']">Standalone 3 (🥒)</a>
+    <a [routerLink]="['feature', 'a']" routerLinkActive="active">Feature A (🍔 & 🍟)</a>
+    <a [routerLink]="['feature', 'b']" routerLinkActive="active">Feature B (🌭 & 🍺)</a>
+    <a [routerLink]="['standalone', '1']" routerLinkActive="active">Standalone 1 (🥦)</a>
+    <a [routerLink]="['standalone', '2']" routerLinkActive="active">Standalone 2 (🍏)</a>
+    <a [routerLink]="['standalone', '3']" routerLinkActive="active">Standalone 3 (🥒)</a>
   </nav>
   <main>
     <router-outlet></router-outlet>
