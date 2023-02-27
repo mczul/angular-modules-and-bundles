@@ -8,9 +8,9 @@ describe('StandaloneThirdComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ StandaloneThirdComponent ]
+      imports: [StandaloneThirdComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(StandaloneThirdComponent);
     component = fixture.componentInstance;
@@ -18,6 +18,9 @@ describe('StandaloneThirdComponent', () => {
   });
 
   it('should create', () => {
+    // given
+    // when
+    // then
     expect(component).toBeTruthy();
   });
 });

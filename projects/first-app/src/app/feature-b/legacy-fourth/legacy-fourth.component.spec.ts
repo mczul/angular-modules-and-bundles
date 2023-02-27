@@ -18,6 +18,9 @@ describe('LegacyFourthComponent', () => {
   });
 
   it('should create', () => {
+    // given
+    // when
+    // then
     expect(component).toBeTruthy();
   });
 });

@@ -1,35 +1,40 @@
 import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
+import {Router} from "@angular/router";
+import {StandaloneFirstComponent} from "./standalone-first/standalone-first.component";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
+        AppComponent,
+        RouterTestingModule.withRoutes([
+          {path: '', component: StandaloneFirstComponent},
+        ]),
       ],
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
+  it('must create the app', () => {
+    // given
+    // when
+    const app = TestBed.createComponent(AppComponent).componentInstance;
+    // then
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'first-app'`, () => {
+  it('must render more than nothing', async () => {
+    // given
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('first-app');
-  });
+    const router = TestBed.inject(Router);
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    // when
+    await router.navigateByUrl('');
     fixture.detectChanges();
+
+    // then
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('first-app app is running!');
+    expect(compiled.querySelector('main')?.textContent?.length).toBeGreaterThan(1_000);
   });
 });

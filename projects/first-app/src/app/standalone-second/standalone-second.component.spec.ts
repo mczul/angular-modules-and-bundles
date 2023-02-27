@@ -17,7 +17,10 @@ describe('StandaloneSecondComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('must create', () => {
+    // given
+    // when
+    // then
     expect(component).toBeTruthy();
   });
 });

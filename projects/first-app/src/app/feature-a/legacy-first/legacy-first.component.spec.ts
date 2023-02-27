@@ -1,6 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {LegacyFirstComponent} from './legacy-first.component';
+import {RouterTestingModule} from "@angular/router/testing";
+import {RouterModule} from "@angular/router";
 
 describe('LegacyFirstComponent', () => {
   let component: LegacyFirstComponent;
@@ -8,16 +10,23 @@ describe('LegacyFirstComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LegacyFirstComponent ]
+      declarations: [LegacyFirstComponent],
+      imports: [
+        RouterModule,
+        RouterTestingModule
+      ],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(LegacyFirstComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('must create', () => {
+    // given
+    // when
+    // then
     expect(component).toBeTruthy();
   });
 });
