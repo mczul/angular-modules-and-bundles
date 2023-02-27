@@ -17,7 +17,7 @@ describe('LegacyFourthComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('must create', () => {
     // given
     // when
     // then
