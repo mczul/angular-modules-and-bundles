@@ -1,0 +1,92 @@
+<h2>First process</h2>
+<app-wizard>
+  <app-step title="Stammdaten" [number]="1" [valid]="base.valid">
+    <h3>First Step</h3>
+    <form [formGroup]="base">
+      <fieldset>
+        <legend>Zum Account</legend>
+
+        <section>
+          <label for="username">Benutzername</label>
+          <input
+            id="username"
+            [formControl]="base.controls.username"
+            type="email"
+            placeholder="max@mustermann.de">
+        </section>
+      </fieldset>
+      <fieldset>
+        <legend>Zur Person</legend>
+
+        <section>
+          <label for="firstName">Vorname</label>
+          <input id="firstName"
+                 [formControl]="base.controls.firstName"
+                 type="text"
+                 placeholder="Max">
+        </section>
+
+        <section>
+          <label for="lastName">Vorname</label>
+          <input id="lastName"
+                 [formControl]="base.controls.lastName"
+                 type="text"
+                 placeholder="Mustermann">
+        </section>
+      </fieldset>
+    </form>
+  </app-step>
+  <app-step title="Kommunikation" [number]="2" [valid]="contact.valid">
+    <h3>Second Step</h3>
+    <form [formGroup]="contact">
+      <fieldset>
+        <legend>Kommunikation</legend>
+
+        <fieldset>
+          <legend>
+            Meine E-Mail Adressen
+            <a class="btn btn--link" (click)="appendEmailInput()">➕</a>
+          </legend>
+
+          <section *ngFor="let control of contactEmails.controls; let i = index;">
+            <label for="email--{{ i }}">E-Mail #{{ i + 1 }}</label>
+            <input
+              id="email--{{ i }}"
+              [formControl]="control"
+              type="email"
+              placeholder="max@mustermann.de">
+            <a class="btn btn--link" (click)="contactEmails.removeAt(i)">❌</a>
+          </section>
+          <section *ngIf="contactEmails.length === 0">
+            Keine zusätzlichen E-Mail-Adressen angegeben.
+          </section>
+        </fieldset>
+
+        <fieldset>
+          <legend>
+            Meine Telefon-Nummern
+            <a class="btn btn--link" (click)="appendPhoneNumberInput()">➕</a>
+          </legend>
+
+          <section *ngFor="let control of contactPhoneNumbers.controls; let i = index">
+            <label for="email--{{ i }}">Tel. #{{ i + 1 }}</label>
+            <input
+              id="phone--{{ i }}"
+              [formControl]="control"
+              type="text"
+              placeholder="+49 123 456 789">
+            <a class="btn btn--link" (click)="contactPhoneNumbers.removeAt(i)">❌</a>
+          </section>
+        </fieldset>
+
+      </fieldset>
+    </form>
+  </app-step>
+  <app-step title="Zusammenfassung" [number]="3" [valid]="state.valid" [nextStepButtonConfig]="{caption: 'Senden'}">
+    <app-registration-summary [summary]="state.getRawValue()" />
+    <form [formGroup]="legal">
+      <label for="privacy">Ich akzeptiere die Datenschutzerklärung.</label>
+      <input type="checkbox" id="privacy" [formControl]="legal.controls.privacy">
+    </form>
+  </app-step>
+</app-wizard>
