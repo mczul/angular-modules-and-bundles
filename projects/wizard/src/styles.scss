@@ -1,1 +1,145 @@
-/* You can add global styles to this file, and also import other style files */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  --font-family: monospace;
+  --highlight-color: darken(tomato, 20);
+  --text-color: #000;
+  --background-color: #fff;
+  --border-color: var(--text-color);
+  --border-width: .1rem;
+
+  font-family: var(--font-family);
+  color: var(--text-color);
+}
+
+#site {
+  max-width: 100ch;
+  margin: auto;
+  padding: clamp(1em, 2vw, 5em);
+}
+
+h1 {
+  margin: 0 0 .75em 0;
+}
+
+h2 {
+  margin: 0 0 .66em 0;
+}
+
+h3 {
+  margin: 0 0 .5em 0;
+}
+
+form {
+  section {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1em;
+    align-items: baseline;
+    justify-content: flex-start;
+  }
+}
+
+dl {
+  dt {
+    text-transform: uppercase;
+    font-weight: bold;
+
+    &:not(:first-of-type) {
+      margin-top: .5em;
+    }
+  }
+
+  dd {
+    margin: 0 0 0 2em;
+  }
+}
+
+fieldset {
+  padding: 1em;
+  margin: 1em 0;
+}
+
+.wizard {
+  padding: 1em;
+
+  & > .wizard__header {
+    margin: 1em 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    justify-content: space-around;
+
+    @media (min-width: 60ch) {
+      flex-direction: row;
+    }
+
+    & > .btn {
+      border-radius: 25%;
+      padding: 1em;
+      border: none;
+
+      background-color: #bbb;
+
+      &:disabled {
+       background-color: #efefef;
+      }
+
+      display: flex;
+      gap: .25em;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  & > .wizard__content {
+
+  }
+
+  .step {
+    &__buttons {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+}
+
+.badge  {
+  --text-color: var(--background-color);
+  border: solid var(--border-color) var(--border-width);
+  border-radius: 50%;
+
+  &--pill {
+    height: 3em;
+    width: 3em;
+    display: grid;
+    align-content: center;
+
+    padding: 1em;
+  }
+
+  &--primary {
+  }
+
+  &--secondary {
+  }
+}
+
+.text {
+  &--primary {
+    color: var(--highlight-color);
+  }
+
+  &--secondary {
+    color: lightgray;
+  }
+}

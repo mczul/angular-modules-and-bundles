@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 
@@ -7,9 +7,17 @@ import {RouterModule} from "@angular/router";
   imports: [CommonModule, RouterModule],
   selector: 'app-root',
   template: `
-    <h1>Wizard App</h1>
+    <div id="site">
+      <header>
+        <h1>Wizard App</h1>
+      </header>
 
-    <router-outlet></router-outlet>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+
+      <footer></footer>
+    </div>
   `,
   styles: []
 })

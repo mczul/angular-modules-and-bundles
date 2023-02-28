@@ -8,8 +8,7 @@
 
         <section>
           <label for="username">Benutzername</label>
-          <input
-            id="username"
+          <input id="username"
             [formControl]="base.controls.username"
             type="email"
             placeholder="max@mustermann.de">
@@ -27,7 +26,7 @@
         </section>
 
         <section>
-          <label for="lastName">Vorname</label>
+          <label for="lastName">Nachname</label>
           <input id="lastName"
                  [formControl]="base.controls.lastName"
                  type="text"
@@ -39,9 +38,6 @@
   <app-step title="Kommunikation" [number]="2" [valid]="contact.valid">
     <h3>Second Step</h3>
     <form [formGroup]="contact">
-      <fieldset>
-        <legend>Kommunikation</legend>
-
         <fieldset>
           <legend>
             Meine E-Mail Adressen
@@ -50,8 +46,7 @@
 
           <section *ngFor="let control of contactEmails.controls; let i = index;">
             <label for="email--{{ i }}">E-Mail #{{ i + 1 }}</label>
-            <input
-              id="email--{{ i }}"
+            <input id="email--{{ i }}"
               [formControl]="control"
               type="email"
               placeholder="max@mustermann.de">
@@ -70,16 +65,13 @@
 
           <section *ngFor="let control of contactPhoneNumbers.controls; let i = index">
             <label for="email--{{ i }}">Tel. #{{ i + 1 }}</label>
-            <input
-              id="phone--{{ i }}"
+            <input id="phone--{{ i }}"
               [formControl]="control"
               type="text"
               placeholder="+49 123 456 789">
             <a class="btn btn--link" (click)="contactPhoneNumbers.removeAt(i)">❌</a>
           </section>
         </fieldset>
-
-      </fieldset>
     </form>
   </app-step>
   <app-step title="Zusammenfassung" [number]="3" [valid]="state.valid" [nextStepButtonConfig]="{caption: 'Senden'}">

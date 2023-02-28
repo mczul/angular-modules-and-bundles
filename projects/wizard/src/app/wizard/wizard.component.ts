@@ -10,34 +10,30 @@ import {CommonModule} from "@angular/common";
   imports: [CommonModule],
   selector: 'app-wizard',
   template: `
-    <div class="d-flex justify-content-around align-items-center">
-      <button *ngFor="let step of steps"
-              class="btn bda-step-header bda-headline d-flex flex-column justify-content-center align-items-center"
-              [disabled]="invalid(previous(step)) || !step.ready"
-              (click)="select(step.number)">
-        <span class="badge badge-pill pt-2 pb-2"
-              [ngClass]="{'badge-secondary': step.number === selectedStepNumber, 'badge-primary': step.number !== selectedStepNumber}"
+    <div class="wizard">
+      <div class="wizard__header">
+        <button *ngFor="let step of steps"
+                class="btn"
+                [ngClass]="{'btn--primary': step.number === selectedStepNumber, 'btn--secondary': step.number !== selectedStepNumber}"
+                [disabled]="invalid(previous(step)) || !step.ready"
+                (click)="select(step.number)">
+        <span class="badge badge--pill"
               style="width: 3em;">{{ step.number }}</span>
-        <span
-          [ngClass]="{'text-secondary': step.number === selectedStepNumber, 'text-primary': step.number !== selectedStepNumber}">
+          <span>
           {{ step.title }}
         </span>
-      </button>
-    </div>
+        </button>
+      </div>
 
-    <div class="text-center mt-2 mb-3">
-      <ng-content></ng-content>
+      <div class="wizard__content">
+        <ng-content></ng-content>
+      </div>
     </div>
   `,
   styles: [`
     :host {
       display: block;
       padding: 0.5em;
-    }
-
-    button.btn.bda-step-header.disabled,
-    button.btn.bda-step-header:disabled {
-      border-style: none !important;
     }
   `],
   providers: [

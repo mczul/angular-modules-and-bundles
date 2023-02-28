@@ -3,6 +3,7 @@ import {WizardService} from "./wizard.service";
 import {Subject} from "rxjs";
 import {map, takeUntil} from "rxjs/operators";
 import {CommonModule} from "@angular/common";
+
 export interface StepButtonConfig {
   show: boolean;
   caption: string;
@@ -16,35 +17,35 @@ export interface StepButtonConfig {
   template: `
     <ng-container *ngIf="active">
       <div *ngIf="showTopButtons"
-           class="d-flex justify-content-between align-items-center"
-           [ngClass]="{'justify-content-between': !isFirst, 'justify-content-end': isFirst}">
-        <button class="btn btn-sm btn-outline-primary bda-round-button"
+           class="step__buttons"
+           [ngClass]="{'step__buttons--between': !isFirst, 'step__buttons--end': isFirst}">
+        <button class="btn"
                 *ngIf="!isFirst && previousStepButtonConfig.show && previousReady()"
                 (click)="moveToPrevious()"
                 [disabled]="previousStepButtonConfig.disabled">
           {{ previousStepButtonConfig.caption }}
         </button>
-        <button class="btn btn-sm btn-outline-primary bda-round-button"
+        <button class="btn"
                 [disabled]="!valid || !ready || nextStepButtonConfig.disabled"
                 *ngIf="nextStepButtonConfig.show"
                 (click)="nextStepButtonConfig.move ? moveToNext() : signalMoveNext()">
           {{ nextStepButtonConfig.caption }}
         </button>
       </div>
-      <div class="d-flex justify-content-between align-items-center mt-3 mb-2">
+      <div class="">
         <div class="w-100">
           <ng-content></ng-content>
         </div>
       </div>
-      <div class="d-flex justify-content-between align-items-center"
-           [ngClass]="{'justify-content-between': !isFirst, 'justify-content-end': isFirst}">
-        <button class="btn btn-sm btn-outline-primary bda-round-button"
+      <div class="step__buttons"
+           [ngClass]="{'step__buttons--between': !isFirst, 'step__buttons--end': isFirst}">
+        <button class="btn"
                 *ngIf="!isFirst && previousStepButtonConfig.show && previousReady()"
                 (click)="moveToPrevious()"
                 [disabled]="previousStepButtonConfig.disabled">
           {{ previousStepButtonConfig.caption }}
         </button>
-        <button class="btn btn-sm btn-outline-primary bda-round-button"
+        <button class="btn"
                 [disabled]="!valid || !ready || nextStepButtonConfig.disabled"
                 *ngIf="nextStepButtonConfig.show"
                 (click)="nextStepButtonConfig.move ? moveToNext() : signalMoveNext()">
