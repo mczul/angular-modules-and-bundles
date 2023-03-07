@@ -212,7 +212,8 @@
               "browserTarget": "wizard:build:production"
             },
             "development": {
-              "browserTarget": "wizard:build:development"
+              "browserTarget": "wizard:build:development",
+              "port": 4201
             }
           },
           "defaultConfiguration": "development"

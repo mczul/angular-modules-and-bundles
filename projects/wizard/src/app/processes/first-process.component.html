@@ -48,7 +48,7 @@
       <fieldset>
         <legend>
           Meine E-Mail Adressen
-          <a class="btn btn--link" (click)="appendEmailInput()">➕</a>
+          <a id="btn--add-email" class="btn btn--link" (click)="appendEmailInput()">➕</a>
         </legend>
 
         <section *ngFor="let control of contactEmails.controls; let i = index;">
@@ -67,7 +67,7 @@
       <fieldset>
         <legend>
           Meine Telefon-Nummern
-          <a class="btn btn--link" (click)="appendPhoneNumberInput()">➕</a>
+          <a id="btn--add-phone" class="btn btn--link" (click)="appendPhoneNumberInput()">➕</a>
         </legend>
 
         <section *ngFor="let control of contactPhoneNumbers.controls; let i = index">
