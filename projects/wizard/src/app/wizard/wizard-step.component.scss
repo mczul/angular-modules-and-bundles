@@ -1,0 +1,39 @@
+// --- Variables -------------------------------------------------------------------------------------------------------
+
+$content-margin: 3em;
+
+// --- Header & Footer -------------------------------------------------------------------------------------------------
+
+.sm-wizard__step__header {
+  margin-bottom: $content-margin;
+}
+
+.sm-wizard__step__footer {
+  margin-top: $content-margin;
+}
+
+// --- Content ---------------------------------------------------------------------------------------------------------
+
+.sm-wizard__step__content {
+  margin: 1.5em 0;
+}
+
+// --- Buttons ---------------------------------------------------------------------------------------------------------
+
+.sm-wizard__step__buttons {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+
+  &--between {
+    justify-content: space-between;
+  }
+
+  &--end {
+    justify-content: flex-end;
+  }
+}
+
+.sm-wizard__step__button {
+  padding: 0.5em .25em;
+}

@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {WizardComponent} from "../wizard/wizard.component";
-import {StepComponent} from "../wizard/step.component";
 import {FormArray, FormControl, FormGroup, FormRecord, ReactiveFormsModule, Validators} from "@angular/forms";
 import {RegistrationSummaryComponent} from "./common/registration-summary.component";
+import {WizardStepComponent} from "../wizard/wizard-step.component";
 
 @Component({
   selector: 'app-first-process',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, WizardComponent, StepComponent, RegistrationSummaryComponent],
+  imports: [CommonModule, ReactiveFormsModule, WizardComponent, WizardStepComponent, RegistrationSummaryComponent],
   templateUrl: './first-process.component.html',
   styles: []
 })
@@ -110,4 +110,7 @@ export class FirstProcessComponent {
     return this.state.controls.legal;
   }
 
+  protected register(): void {
+    alert(JSON.stringify(this.state.getRawValue(), null, 2));
+  }
 }

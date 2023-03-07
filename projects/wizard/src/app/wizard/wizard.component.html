@@ -1,0 +1,16 @@
+<section class="sm-wizard">
+  <section class="sm-wizard__header">
+    <button *ngFor="let step of wizardService.steps | async"
+            class="sm-wizard__button sm-wizard__button--step"
+            [ngClass]="{'sm-wizard__button--step--selected': (wizardService.selected | async) === step.number}"
+            [attr.data-step-number]="step.number"
+            [disabled]="!wizardService.isSelectableSync(step.number) || !step.ready"
+            (click)="wizardService.select(step.number)">
+      <span class="sm-wizard__button--step__badge">{{ step.number }}</span>
+      <span class="sm-wizard__button--step__title">{{ step.title }}</span>
+    </button>
+  </section>
+  <section class="sm-wizard__content">
+    <ng-content></ng-content>
+  </section>
+</section>

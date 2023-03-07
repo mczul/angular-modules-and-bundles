@@ -1,0 +1,38 @@
+<ng-container *ngIf="isActive">
+  <section *ngIf="showTopButtons"
+           class="sm-wizard__step__header sm-wizard__step__buttons"
+           [ngClass]="{'sm-wizard__step__buttons--between' : !isFirst, 'sm-wizard__step__buttons--end': isFirst}">
+    <button class="sm-wizard__step__button sm-wizard__step__button--previous"
+            *ngIf="!isFirst && previousStepButtonConfig.show"
+            (click)="handlePreviousButtonClick()"
+            [disabled]="previousStepButtonConfig.disabled">
+      {{ previousStepButtonConfig.caption }}
+    </button>
+    <button class="sm-wizard__step__button sm-wizard__step__button--next"
+            *ngIf="nextStepButtonConfig.show"
+            (click)="handleNextButtonClick()"
+            [disabled]="!valid || !ready || nextStepButtonConfig.disabled">
+      {{ nextStepButtonConfig.caption }}
+    </button>
+  </section>
+
+  <section class="sm-wizard__step__content">
+    <ng-content></ng-content>
+  </section>
+
+  <section class="sm-wizard__step__footer sm-wizard__step__buttons"
+           [ngClass]="{'sm-wizard__step__buttons--between' : !isFirst, 'sm-wizard__step__buttons--end': isFirst}">
+    <button class="sm-wizard__step__button sm-wizard__step__button--previous"
+            *ngIf="!isFirst && previousStepButtonConfig.show"
+            (click)="handlePreviousButtonClick()"
+            [disabled]="previousStepButtonConfig.disabled">
+      {{ previousStepButtonConfig.caption }}
+    </button>
+    <button class="sm-wizard__step__button sm-wizard__step__button--next"
+            *ngIf="nextStepButtonConfig.show"
+            (click)="handleNextButtonClick()"
+            [disabled]="!valid || !ready || nextStepButtonConfig.disabled">
+      {{ nextStepButtonConfig.caption }}
+    </button>
+  </section>
+</ng-container>

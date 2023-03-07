@@ -1,6 +1,9 @@
 <h2>First process</h2>
 <app-wizard>
-  <app-step title="Stammdaten" [number]="1" [valid]="base.valid">
+  <app-wizard-step title="Stammdaten"
+                   [number]="1"
+                   [valid]="base.valid"
+                   [nextStepButtonConfig]="{caption: 'Kommunikationsdaten erfassen'}">
     <h3>First Step</h3>
     <form [formGroup]="base">
       <fieldset>
@@ -9,9 +12,9 @@
         <section>
           <label for="username">Benutzername</label>
           <input id="username"
-            [formControl]="base.controls.username"
-            type="email"
-            placeholder="max@mustermann.de">
+                 [formControl]="base.controls.username"
+                 type="email"
+                 placeholder="max@mustermann.de">
         </section>
       </fieldset>
       <fieldset>
@@ -34,51 +37,75 @@
         </section>
       </fieldset>
     </form>
-  </app-step>
-  <app-step title="Kommunikation" [number]="2" [valid]="contact.valid">
+  </app-wizard-step>
+  <app-wizard-step title="Kommunikation"
+                   [number]="2"
+                   [valid]="contact.valid"
+                   [previousStepButtonConfig]="{caption: 'zurück zu den Stammdaten'}"
+                   [nextStepButtonConfig]="{caption: 'zur Kontrolle'}">
     <h3>Second Step</h3>
     <form [formGroup]="contact">
-        <fieldset>
-          <legend>
-            Meine E-Mail Adressen
-            <a class="btn btn--link" (click)="appendEmailInput()">➕</a>
-          </legend>
+      <fieldset>
+        <legend>
+          Meine E-Mail Adressen
+          <a class="btn btn--link" (click)="appendEmailInput()">➕</a>
+        </legend>
 
-          <section *ngFor="let control of contactEmails.controls; let i = index;">
-            <label for="email--{{ i }}">E-Mail #{{ i + 1 }}</label>
-            <input id="email--{{ i }}"
-              [formControl]="control"
-              type="email"
-              placeholder="max@mustermann.de">
-            <a class="btn btn--link" (click)="contactEmails.removeAt(i)">❌</a>
-          </section>
-          <section *ngIf="contactEmails.length === 0">
-            Keine zusätzlichen E-Mail-Adressen angegeben.
-          </section>
-        </fieldset>
+        <section *ngFor="let control of contactEmails.controls; let i = index;">
+          <label for="email--{{ i }}">E-Mail #{{ i + 1 }}</label>
+          <input id="email--{{ i }}"
+                 [formControl]="control"
+                 type="email"
+                 placeholder="max@mustermann.de">
+          <a class="btn btn--link" (click)="contactEmails.removeAt(i)">❌</a>
+        </section>
+        <section *ngIf="contactEmails.length === 0">
+          Keine zusätzlichen E-Mail-Adressen angegeben.
+        </section>
+      </fieldset>
 
-        <fieldset>
-          <legend>
-            Meine Telefon-Nummern
-            <a class="btn btn--link" (click)="appendPhoneNumberInput()">➕</a>
-          </legend>
+      <fieldset>
+        <legend>
+          Meine Telefon-Nummern
+          <a class="btn btn--link" (click)="appendPhoneNumberInput()">➕</a>
+        </legend>
 
-          <section *ngFor="let control of contactPhoneNumbers.controls; let i = index">
-            <label for="email--{{ i }}">Tel. #{{ i + 1 }}</label>
-            <input id="phone--{{ i }}"
-              [formControl]="control"
-              type="text"
-              placeholder="+49 123 456 789">
-            <a class="btn btn--link" (click)="contactPhoneNumbers.removeAt(i)">❌</a>
-          </section>
-        </fieldset>
+        <section *ngFor="let control of contactPhoneNumbers.controls; let i = index">
+          <label for="email--{{ i }}">Tel. #{{ i + 1 }}</label>
+          <input id="phone--{{ i }}"
+                 [formControl]="control"
+                 type="text"
+                 placeholder="+49 123 456 789">
+          <a class="btn btn--link" (click)="contactPhoneNumbers.removeAt(i)">❌</a>
+        </section>
+      </fieldset>
     </form>
-  </app-step>
-  <app-step title="Zusammenfassung" [number]="3" [valid]="state.valid" [nextStepButtonConfig]="{caption: 'Senden'}">
-    <app-registration-summary [summary]="state.getRawValue()" />
+  </app-wizard-step>
+  <app-wizard-step title="Zusammenfassung"
+                   [number]="3"
+                   [valid]="state.valid"
+                   [nextStepButtonConfig]="{caption: 'Senden'}"
+                   (next)="register()">
+    <app-registration-summary [summary]="state.getRawValue()"/>
     <form [formGroup]="legal">
       <label for="privacy">Ich akzeptiere die Datenschutzerklärung.</label>
       <input type="checkbox" id="privacy" [formControl]="legal.controls.privacy">
     </form>
-  </app-step>
+  </app-wizard-step>
 </app-wizard>
+
+<!--
+<h3>Additional Wizard (for scoping demo)</h3>
+
+<app-wizard>
+  <app-wizard-step [number]="1" title="Vertragsdaten">
+    <h4>Vertragsdaten</h4>
+  </app-wizard-step>
+  <app-wizard-step [number]="2" title="Datenschutz">
+    <h4>Datenschutz</h4>
+  </app-wizard-step>
+  <app-wizard-step [number]="3" title="Zusammenfassung" [nextStepButtonConfig]="{show: false}">
+    <h4>Zusammenfassung</h4>
+  </app-wizard-step>
+</app-wizard>
+-->

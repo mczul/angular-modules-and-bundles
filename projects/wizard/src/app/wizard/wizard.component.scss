@@ -1,0 +1,52 @@
+// --- Host ------------------------------------------------------------------------------------------------------------
+
+.sm-wizard {
+  margin: 2em 0;
+
+  border-style: none;
+  filter: drop-shadow(.1em .1em olive);
+}
+
+// --- Header ----------------------------------------------------------------------------------------------------------
+
+.sm-wizard__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1em;
+}
+
+// --- Buttons ---------------------------------------------------------------------------------------------------------
+
+.sm-wizard__button {
+
+  flex-basis: 20ch;
+
+  &--step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5em;
+    padding: .5em;
+
+    &--selected {
+      font-weight: bolder;
+    }
+
+    &__badge {
+      border: solid .1em black;
+      border-radius: 50%;
+      width: 4ch;
+      height: 4ch;
+
+      background-color: navy;
+      color: white;
+      font-weight: bold;
+
+      display: grid;
+      place-items: center;
+    }
+  }
+
+}
+

@@ -37,11 +37,16 @@ h3 {
 form {
   section {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 2fr 3fr 1fr;
     gap: 1em;
     align-items: baseline;
     justify-content: flex-start;
   }
+
+  section:has(label) {
+    padding: .25em 0;
+  }
+
 }
 
 dl {
