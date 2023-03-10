@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 
 export interface WizardStep {
   /**
@@ -41,6 +41,10 @@ export class WizardService {
     return this._steps;
   }
 
+  get stepsSync() {
+    return this._stepsCtrl$.value.slice();
+  }
+
   // --- Selection --------------------------------------------------------------------------------
 
   protected _selectionCtrl$ = new BehaviorSubject<number | null>(null);
@@ -56,12 +60,16 @@ export class WizardService {
     return this._selected;
   }
 
+  get selectedSync() {
+    return this._selectionCtrl$.value;
+  }
+
   /**
    * Selects the {@link WizardStep} with the given step number (if it exists and does not have invalid predecessors)
    */
   select(stepNumber: number): void {
     // Step does not exist?
-    if(!this.getSync(stepNumber)) {
+    if (!this.getSync(stepNumber)) {
       return;
     }
     const previous = this.getPreviousSync(stepNumber);
@@ -71,6 +79,30 @@ export class WizardService {
       console.log(`[WizardService] selecting step #${stepNumber}.`);
       this._selectionCtrl$.next(stepNumber);
     }
+  }
+
+  /**
+   * TODO
+   */
+  selectFirst(): void {
+    const first = this.firstSync;
+    if (!!first && this.isSelectableSync(first.number)) {
+      this.select(first.number);
+    }
+  }
+
+  /**
+   * TODO
+   */
+  selectLastSelectable(): void {
+    const indexOfFirstNotSelectable = this.stepsSync.findIndex(step => !this.isSelectableSync(step.number));
+    if (indexOfFirstNotSelectable > 0) {
+      const lastNotSelectable = this.stepsSync[indexOfFirstNotSelectable - 1];
+      this.select(lastNotSelectable.number);
+      return;
+    }
+    // Fallback
+    this.selectFirst();
   }
 
   /**
@@ -110,6 +142,10 @@ export class WizardService {
     return this._first;
   }
 
+  get firstSync() {
+    return this._stepsCtrl$.value[0];
+  }
+
   // --- Last -------------------------------------------------------------------------------------
 
   protected _last = this._stepsCtrl$.pipe(
@@ -123,6 +159,10 @@ export class WizardService {
    */
   get last() {
     return this._last;
+  }
+
+  get lastSync() {
+    return this._stepsCtrl$.value[this._stepsCtrl$.value.length - 1];
   }
 
   // --- Validity & Readiness ---------------------------------------------------------------------
@@ -149,7 +189,8 @@ export class WizardService {
   }
 
   /**
-   * Retruns `true` if the given step is the first or the previous step is considered valid, `false` otherwise.
+   * Retruns `true` when the step with the given number is considered "selectable" or `false` otherwise.
+   * A step is called "selectable" if it's the first step or all previous steps are valid.
    */
   isSelectableSync(stepNumber: number): boolean {
     const previous = this.getPreviousSync(stepNumber);

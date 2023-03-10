@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {WizardComponent} from "../wizard/wizard.component";
-import {FormArray, FormControl, FormGroup, FormRecord, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {RegistrationSummaryComponent} from "./common/registration-summary.component";
 import {WizardStepComponent} from "../wizard/wizard-step.component";
 
@@ -13,6 +13,9 @@ import {WizardStepComponent} from "../wizard/wizard-step.component";
   styles: []
 })
 export class FirstProcessComponent {
+  @ViewChild(WizardComponent)
+  protected wizardComponent!: WizardComponent;
+
   protected state = new FormGroup({
     base: new FormGroup({
       username: new FormControl<string>('', {validators: [Validators.required, Validators.email], nonNullable: true}),
@@ -110,7 +113,15 @@ export class FirstProcessComponent {
     return this.state.controls.legal;
   }
 
+  /**
+   * Simulates the registration of a new account
+   */
   protected register(): void {
     alert(JSON.stringify(this.state.getRawValue(), null, 2));
+    setTimeout(() => {
+      this.state.reset();
+      this.wizardComponent.remoteControl.moveToFirstStep();
+    }, 1_000);
   }
+
 }
