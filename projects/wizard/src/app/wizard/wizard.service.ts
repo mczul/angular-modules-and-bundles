@@ -57,14 +57,18 @@ export class WizardService {
   }
 
   /**
-   * Selects the {@link WizardStep} with the given step number (if it exists)
+   * Selects the {@link WizardStep} with the given step number (if it exists and does not have invalid predecessors)
    */
   select(stepNumber: number): void {
-    console.log(`[WizardService] selecting step #${stepNumber}.`);
+    // Step does not exist?
+    if(!this.getSync(stepNumber)) {
+      return;
+    }
     const previous = this.getPreviousSync(stepNumber);
     const previousValid = !previous || this.isValidSync(previous.number);
     // step must exist and have valid previous step if present
-    if (!!this.getSync(stepNumber) && previousValid) {
+    if (previousValid) {
+      console.log(`[WizardService] selecting step #${stepNumber}.`);
       this._selectionCtrl$.next(stepNumber);
     }
   }
