@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {WizardComponent} from "../wizard/wizard.component";
 import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -12,7 +12,7 @@ import {WizardStepComponent} from "../wizard/wizard-step.component";
   templateUrl: './first-process.component.html',
   styles: []
 })
-export class FirstProcessComponent {
+export class FirstProcessComponent implements AfterViewChecked {
   @ViewChild(WizardComponent)
   protected wizardComponent!: WizardComponent;
 
@@ -122,6 +122,12 @@ export class FirstProcessComponent {
       this.state.reset();
       this.wizardComponent.remoteControl.moveToFirstStep();
     }, 1_000);
+  }
+
+  ngAfterViewChecked(): void {
+    setTimeout(() => {
+    //this.wizardComponent.remoteControl.moveToLastSelectableStep();
+    });
   }
 
 }

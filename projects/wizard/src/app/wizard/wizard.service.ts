@@ -92,15 +92,17 @@ export class WizardService {
   }
 
   /**
-   * TODO
+   * TODO: This will probably not work due to the async nature of the underlying initialization logic.
+   *
    */
   selectLastSelectable(): void {
     const indexOfFirstNotSelectable = this.stepsSync.findIndex(step => !this.isSelectableSync(step.number));
     if (indexOfFirstNotSelectable > 0) {
-      const lastNotSelectable = this.stepsSync[indexOfFirstNotSelectable - 1];
-      this.select(lastNotSelectable.number);
+      const lastSelectable = this.stepsSync[indexOfFirstNotSelectable - 1];
+      this.select(lastSelectable.number);
       return;
     }
+    // TODO: Check for redundant operation (due to implicit selection of first step if it's the only selectable)
     // Fallback
     this.selectFirst();
   }
@@ -203,7 +205,7 @@ export class WizardService {
     return this.isValidSync(previous.number);
   }
 
-  isPreviousReady(stepNumber: number): boolean {
+  isPreviousReadySync(stepNumber: number): boolean {
     const previous = this.getPreviousSync(stepNumber);
     // if no previous step present...
     if (!previous) {
