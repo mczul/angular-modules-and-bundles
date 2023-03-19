@@ -4,6 +4,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {WizardComponent} from './wizard.component';
 import {WizardStep} from './wizard.service';
 import {WizardStepComponent} from './wizard-step.component';
+import {FakeStep} from "./wizard.service.spec";
 
 @Component({
   standalone: true,
@@ -29,9 +30,9 @@ import {WizardStepComponent} from './wizard-step.component';
 })
 class WizardHost {
   steps: WizardStep[] = [
-    {number: 2, title: 'Second step', valid: true, ready: true},
-    {number: 1, title: 'First step', valid: true, ready: true},
-    {number: 3, title: 'Third step', valid: true, ready: true},
+    new FakeStep(2, 'Second step', true, true),
+    new FakeStep(1, 'First step',  true,  true),
+    new FakeStep(3, 'Third step',  true,  true),
   ];
 }
 

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {WizardService, WizardStep} from './wizard.service';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {CommonModule} from "@angular/common";
 
@@ -95,17 +95,40 @@ export class WizardStepComponent implements WizardStep, OnInit, OnDestroy {
   protected isLast = false; // initialized via service
   protected isActive = false; // initialized via service
 
+  protected _validityCtrl$ = new BehaviorSubject<boolean>(true);
+  // TODO: distinctUntilChanged?
+  protected _validityChanges = this._validityCtrl$.asObservable();
+  protected _readinessCtrl$ = new BehaviorSubject<boolean>(true);
+  // TODO: distinctUntilChanged?
+  protected _readinessChanges = this._readinessCtrl$.asObservable();
+
   /**
    * As described in {@link WizardStep}
    */
   @Input()
-  valid = true;
+  set valid(value: boolean) {
+    this._validityCtrl$.next(value);
+  }
+  get valid() {
+    return this._validityCtrl$.getValue();
+  }
+  get validityChanges() {
+    return this._validityChanges;
+  }
 
   /**
    * A boolean flag that indicates whether the step is ready for editing (e.g. has been initialized)
    */
   @Input()
-  ready = true;
+  set ready(value: boolean) {
+    this._readinessCtrl$.next(value);
+  }
+  get ready() {
+    return this._readinessCtrl$.getValue();
+  }
+  get readinessChanges() {
+    return this._readinessChanges;
+  }
 
   @Input()
   title!: string;

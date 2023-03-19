@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 
 export interface WizardStep {
@@ -12,9 +12,17 @@ export interface WizardStep {
    */
   valid: boolean;
   /**
+   * Emits a boolean value for {@link WizardStep#valid} whenever the validity changes.
+   */
+  validityChanges: Observable<boolean>;
+  /**
    * A boolean flag that indicates whether the step is ready for editing (e.g. has been initialized)
    */
   ready: boolean;
+  /**
+   * Emits a boolean value for {@link WizardStep#ready} whenever the readiness changes.
+   */
+  readinessChanges: Observable<boolean>;
   /**
    * The title as displayed to the user
    */
@@ -100,11 +108,7 @@ export class WizardService {
     if (indexOfFirstNotSelectable > 0) {
       const lastSelectable = this.stepsSync[indexOfFirstNotSelectable - 1];
       this.select(lastSelectable.number);
-      return;
     }
-    // TODO: Check for redundant operation (due to implicit selection of first step if it's the only selectable)
-    // Fallback
-    this.selectFirst();
   }
 
   /**

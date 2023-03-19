@@ -1,9 +1,47 @@
-import { WizardService, WizardStep } from './wizard.service';
-import { Observable, reduce } from 'rxjs';
-import { take } from 'rxjs/operators';
+import {WizardService, WizardStep} from './wizard.service';
+import {BehaviorSubject, Observable, reduce} from 'rxjs';
+import {take} from 'rxjs/operators';
+
+// see https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs
+export class FakeStep implements WizardStep {
+  protected _validityCtrl$ = new BehaviorSubject<boolean>(true);
+  protected _validityChanges = this._validityCtrl$.asObservable();
+  protected _readinessCtrl$ = new BehaviorSubject<boolean>(true);
+  protected _readinessChanges = this._readinessCtrl$.asObservable();
+
+  set valid(value: boolean) {
+    this._validityCtrl$.next(value);
+  }
+
+  get valid() {
+    return this._validityCtrl$.getValue();
+  }
+
+  get validityChanges() {
+    return this._validityChanges;
+  }
+
+  set ready(value: boolean) {
+    this._readinessCtrl$.next(value);
+  }
+
+  get ready() {
+    return this._readinessCtrl$.getValue();
+  }
+
+  get readinessChanges() {
+    return this._readinessChanges;
+  }
+
+  constructor(public readonly number: number, public readonly title: string, valid: boolean, ready: boolean) {
+    this.valid = valid;
+    this.ready = ready;
+  }
+
+}
 
 function buildStep(number: number, valid: boolean = true, ready: boolean = true, title: string = 'Step X'): WizardStep {
-  return {number, valid, ready, title};
+  return new FakeStep(number, title, valid, ready);
 }
 
 describe('WizardService', () => {

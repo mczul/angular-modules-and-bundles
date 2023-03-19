@@ -1,18 +1,26 @@
-import {AfterViewChecked, Component, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {WizardComponent} from "../wizard/wizard.component";
 import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {RegistrationSummaryComponent} from "./common/registration-summary.component";
 import {WizardStepComponent} from "../wizard/wizard-step.component";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-first-process',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, WizardComponent, WizardStepComponent, RegistrationSummaryComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    WizardComponent,
+    WizardStepComponent,
+    RegistrationSummaryComponent
+  ],
   templateUrl: './first-process.component.html',
   styles: []
 })
-export class FirstProcessComponent implements AfterViewChecked {
+export class FirstProcessComponent {
   @ViewChild(WizardComponent)
   protected wizardComponent!: WizardComponent;
 
@@ -124,10 +132,8 @@ export class FirstProcessComponent implements AfterViewChecked {
     }, 1_000);
   }
 
-  ngAfterViewChecked(): void {
-    setTimeout(() => {
-    //this.wizardComponent.remoteControl.moveToLastSelectableStep();
-    });
-  }
+  constructor(protected httpClient: HttpClient) {
 
+  }
 }
+
